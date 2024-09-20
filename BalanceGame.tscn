@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://cnn186hw2p3rt"]
+
+[ext_resource type="Script" path="res://scripts/BalanceBall.gd" id="1_a6pt0"]
+[ext_resource type="Script" path="res://scripts/BalanceBar.gd" id="2_hf0ty"]
+[ext_resource type="Texture2D" uid="uid://ch1er2ltli5r1" path="res://assets/flat.jpg" id="3_ll0kw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_81y5l"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_elrpn"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8tdss"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_my0wp"]
+resource_local_to_scene = true
+size = Vector2(288, 12)
+
+[node name="BalanceGame" type="Node2D"]
+scale = Vector2(2, 2)
+
+[node name="BalanceBall" type="RigidDynamicBody2D" parent="."]
+position = Vector2(504, 232)
+collision_layer = 3
+collision_mask = 3
+mass = 0.5
+script = ExtResource( "1_a6pt0" )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BalanceBall"]
+material = SubResource( "ShaderMaterial_81y5l" )
+shape = SubResource( "CircleShape2D_elrpn" )
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2(472, 256)
+node_a = NodePath("BalanceBar")
+node_b = NodePath("BalanceBarWedge")
+
+[node name="BalanceBar" type="RigidDynamicBody2D" parent="PinJoint2D"]
+position = Vector2(0, -12)
+mass = 80.0
+physics_material_override = SubResource( "PhysicsMaterial_8tdss" )
+gravity_scale = 0.0
+can_sleep = false
+script = ExtResource( "2_hf0ty" )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PinJoint2D/BalanceBar"]
+material = SubResource( "ShaderMaterial_81y5l" )
+position = Vector2(0, 12)
+shape = SubResource( "RectangleShape2D_my0wp" )
+
+[node name="BalanceBarWedge" type="RigidDynamicBody2D" parent="PinJoint2D"]
+freeze = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PinJoint2D/BalanceBarWedge"]
+polygon = PackedVector2Array(0, 0, -8, 12, 8, 12)
+
+[node name="Overlay" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 0.666667)
+show_behind_parent = true
+offset_right = 960.0
+offset_bottom = 544.0
+texture = ExtResource( "3_ll0kw" )
+ignore_texture_size = true

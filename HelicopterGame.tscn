@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxcmio2yohcdt"]
+
+[ext_resource type="Script" path="res://scripts/helicopter.gd" id="1_olwe8"]
+[ext_resource type="Texture2D" uid="uid://ch1er2ltli5r1" path="res://assets/flat.jpg" id="2_pohud"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_urj76"]
+size = Vector2(32, 32)
+
+[node name="HelicopterGame" type="Node2D"]
+position = Vector2(960, 544)
+
+[node name="RigidDynamicBody2D" type="RigidDynamicBody2D" parent="."]
+can_sleep = false
+script = ExtResource( "1_olwe8" )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidDynamicBody2D"]
+position = Vector2(-832, -32)
+shape = SubResource( "RectangleShape2D_urj76" )
+
+[node name="Overlay" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 0.666667)
+show_behind_parent = true
+offset_left = -960.0
+offset_top = -544.0
+texture = ExtResource( "2_pohud" )
+ignore_texture_size = true
+metadata/_edit_lock_ = true

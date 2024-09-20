@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://cegilwjnuj51b"]
+
+[ext_resource type="Script" path="res://scripts/dodger.gd" id="1_ln231"]
+[ext_resource type="Script" path="res://scripts/Spawner.gd" id="2_85e2m"]
+[ext_resource type="Texture2D" uid="uid://ch1er2ltli5r1" path="res://assets/flat.jpg" id="3_bhqwh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cwyq6"]
+size = Vector2(59.5068, 66.0475)
+
+[node name="DodgeGame" type="Node2D"]
+show_behind_parent = true
+position = Vector2(-16, 0)
+
+[node name="DodgeBody" type="RigidBody2D" parent="."]
+position = Vector2(80, 16)
+freeze = true
+script = ExtResource("1_ln231")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DodgeBody"]
+position = Vector2(432, 256)
+scale = Vector2(0.537753, 0.4845)
+shape = SubResource("RectangleShape2D_cwyq6")
+
+[node name="Spawner" type="RigidBody2D" parent="."]
+position = Vector2(8, 0)
+script = ExtResource("2_85e2m")
+
+[node name="Arrow" type="CollisionPolygon2D" parent="Spawner"]
+visible = false
+polygon = PackedVector2Array(0, 0, 16, 8, 0, 16)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(64, 16)
+color = Color(1, 1, 1, 0.25098)
+polygon = PackedVector2Array(432, 48, 432, 464, 464, 464, 464, 48)
+
+[node name="Overlay" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 0.666667)
+show_behind_parent = true
+offset_left = 16.0
+offset_right = 976.0
+offset_bottom = 544.0
+texture = ExtResource("3_bhqwh")
+expand_mode = 1
+metadata/_edit_lock_ = true

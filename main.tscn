@@ -1,0 +1,108 @@
+[gd_scene load_steps=13 format=3 uid="uid://dho3wuxutppfh"]
+
+[ext_resource type="Script" path="res://scripts/Game.gd" id="1_t8jo8"]
+[ext_resource type="PackedScene" uid="uid://cnn186hw2p3rt" path="res://BalanceGame.tscn" id="2_3b545"]
+[ext_resource type="PackedScene" uid="uid://ce2w8xybtcr3b" path="res://CollectGame.tscn" id="3_lmjte"]
+[ext_resource type="PackedScene" uid="uid://bxcmio2yohcdt" path="res://HelicopterGame.tscn" id="4_lj3hv"]
+[ext_resource type="PackedScene" uid="uid://cegilwjnuj51b" path="res://DodgeGame.tscn" id="5_2rpj5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8l73l"]
+size = Vector2(8, 544)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nrt3b"]
+size = Vector2(8, 528)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_itvql"]
+size = Vector2(8, 544)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_144u5"]
+size = Vector2(944, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_whuee"]
+size = Vector2(944, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qwicw"]
+size = Vector2(944, 8)
+
+[sub_resource type="Theme" id="Theme_xu3t7"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_t8jo8")
+
+[node name="Walls" type="RigidBody2D" parent="."]
+freeze = true
+
+[node name="Right" type="CollisionShape2D" parent="Walls"]
+position = Vector2(1912, 544)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_8l73l")
+
+[node name="CenterY" type="CollisionShape2D" parent="Walls"]
+position = Vector2(960, 544)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_nrt3b")
+
+[node name="Left" type="CollisionShape2D" parent="Walls"]
+position = Vector2(8, 544)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_itvql")
+
+[node name="Top" type="CollisionShape2D" parent="Walls"]
+position = Vector2(960, 8)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_144u5")
+
+[node name="Bottom" type="CollisionShape2D" parent="Walls"]
+position = Vector2(960, 1080)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_whuee")
+
+[node name="CenterH" type="CollisionShape2D" parent="Walls"]
+position = Vector2(960, 544)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_qwicw")
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 16.0
+offset_right = 1920.0
+offset_bottom = 1088.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_xu3t7")
+
+[node name="Score" type="RichTextLabel" parent="GUI"]
+layout_mode = 0
+anchor_left = 0.492
+anchor_top = 0.5
+anchor_right = 0.492
+anchor_bottom = 0.5
+offset_left = -32.64
+offset_top = -32.0
+offset_right = 31.36
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "60"
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = true
+
+[node name="BalanceGame" parent="." instance=ExtResource("2_3b545")]
+show_behind_parent = true
+scale = Vector2(1, 1)
+metadata/_edit_lock_ = true
+
+[node name="CollectGame" parent="." instance=ExtResource("3_lmjte")]
+show_behind_parent = true
+position = Vector2(0, 1088)
+metadata/_edit_lock_ = true
+
+[node name="HelicopterGame" parent="." instance=ExtResource("4_lj3hv")]
+show_behind_parent = true
+position = Vector2(1920, 1088)
+metadata/_edit_lock_ = true
+
+[node name="DodgeGame" parent="." instance=ExtResource("5_2rpj5")]
+position = Vector2(944, 0)
+metadata/_edit_lock_ = true
